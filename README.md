@@ -84,7 +84,7 @@
   text-transform: uppercase;
   font-size: 40px;
   font-weight: 400;
-  min-height: 53px;
+  min-height: 60px;
  }
 
  .wordSearchContainer .wordSearchGrid canvas {
