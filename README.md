@@ -51,8 +51,8 @@
  }
  .wordSearchContainer .wordSearchGrid {
   display: grid;
-  grid-template-columns: repeat(12, 40px);
-  grid-template-rows: repeat(12, 40px);
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
   margin-bottom: 10px;
   position: relative;
  }
@@ -177,7 +177,7 @@
  var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas'];
  var totalWords = words.length;
  var hintsUsed = 0;
- var columnsNumber = 12;
+ var columnsNumber = 10;
  var wordsGrid = [];
  for(let i = 0; i < columnsNumber; ++i) {
   var row = [];
@@ -682,8 +682,8 @@
 <style>
  body .wordSearchContainer .wordSearchGrid {
    display: flex;
-    grid-template-columns: repeat(12, 40px);
-    grid-template-rows: repeat(12, 40px);
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
     margin-bottom: 10px;
     position: relative;
     flex-direction: row;
