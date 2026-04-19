@@ -102,6 +102,7 @@
   gap: 10px;
   max-width: 480px;
   margin-bottom: 20px;
+  padding: 0 10px;
  }
  .wordSearchContainer .wordsList span {
   text-transform: uppercase;
@@ -675,3 +676,25 @@
   });
  });
 </script>
+
+
+
+<style>
+ .wordSearchContainer {
+   display: flex;
+    grid-template-columns: repeat(12, 40px);
+    grid-template-rows: repeat(12, 40px);
+    margin-bottom: 10px;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 480px;
+    width: 100%;
+    max-height: 480px;
+    height: 100%;
+ }
+ .wordSearchContainer .gridItem {
+   flex: 1 1 8%;
+ }
+</style>
