@@ -12,7 +12,7 @@
   justify-content: center;
  }
  .wordSearchContainer {
-  max-width: 500px;
+  max-width: 520px;
   width: 100vw;
   height: fit-content;
   display: flex;
@@ -21,6 +21,8 @@
   background-color: beige;
   position: relative;
   overflow: hidden;
+  padding: 0 10px;
+  box-sizing: border-box;
  }
  .wordSearchContainer .hintButton {
   position: absolute;
@@ -695,5 +697,15 @@
  }
  body .wordSearchContainer .wordSearchGrid .gridItem {
    flex: 1 1 10%;
+   min-height: 30px;
+   height: calc(10vw - 2px);
+ }
+ .anchorjs-link {
+  display: none;
+ }
+ @media screen and (max-width: 360px) {
+  .wordSearchContainer .wordSearchGrid .gridItem {
+   font-size: 25px;
+  }
  }
 </style>
