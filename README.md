@@ -695,6 +695,6 @@
     height: 100%;
  }
  body .wordSearchContainer .wordSearchGrid .gridItem {
-   flex: 1 1 8%;
+   flex: 1 1 10%;
  }
 </style>
