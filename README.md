@@ -314,7 +314,8 @@
  $(document).ready(function() {
   $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
   var selectedTextContainer = $('.selectedText');
-  $('#canvas').prop({ width: 480, height: 480 });
+  
+  $('#canvas').prop({ width: $('.wordSearchContainer .wordSearchGrid')[0].clientWidth, height: $('.wordSearchContainer .wordSearchGrid')[0].clientHeight });
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
   ctx.lineWidth = 48;
