@@ -315,7 +315,7 @@
   $('#canvas').prop({ width: 480, height: 480 });
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
-  ctx.lineWidth = 40;
+  ctx.lineWidth = 48;
   ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
   ctx.lineCap = 'round';
 
@@ -447,8 +447,8 @@
     if(hintEndRow != 0 && hintEndColumn != 0) {
      hintsUsed++;
      ctx.beginPath();
-     ctx.moveTo(hintStartColumn * 40 - 20, hintStartRow * 40 - 20);
-     ctx.lineTo(hintEndColumn * 40 - 20, hintEndRow * 40 - 20);
+     ctx.moveTo(hintStartColumn * 48 - 20, hintStartRow * 48 - 20);
+     ctx.lineTo(hintEndColumn * 48 - 20, hintEndRow * 48 - 20);
      ctx.stroke();
      ctx.closePath();
 
@@ -491,8 +491,8 @@
     selectedText = startLetter;
     selectedTextContainer[0].innerHTML = selectedText;
     ctx.beginPath();
-    ctx.moveTo(startColumn * 40 - 20, startRow * 40 - 20);
-    ctx.lineTo(startColumn * 40 - 20, startRow * 40 - 20);
+    ctx.moveTo(startColumn * 48 - 20, startRow * 48 - 20);
+    ctx.lineTo(startColumn * 48 - 20, startRow * 48 - 20);
     ctx.stroke();
    }
   });
@@ -508,13 +508,13 @@
      ctx.clearRect(0, 0, 480, 480);
      for(let i = 0; i < correctLines.length; ++i) {
       ctx.beginPath();
-      ctx.moveTo(correctLines[i][0][1] * 40 - 20, correctLines[i][0][0] * 40 - 20);
-      ctx.lineTo(correctLines[i][1][1] * 40 - 20, correctLines[i][1][0] * 40 - 20);
+      ctx.moveTo(correctLines[i][0][1] * 48 - 20, correctLines[i][0][0] * 48 - 20);
+      ctx.lineTo(correctLines[i][1][1] * 48 - 20, correctLines[i][1][0] * 48 - 20);
       ctx.stroke();
       ctx.closePath();
      }
      ctx.beginPath();
-     ctx.moveTo(startColumn * 40 - 20, startRow * 40 - 20);
+     ctx.moveTo(startColumn * 48 - 20, startRow * 48 - 20);
     
      var itemIndex = gridItem.getAttribute('data-index') || 0;
      endRow = Math.ceil(itemIndex / columnsNumber);
@@ -583,12 +583,12 @@
        }
       }
       selectedTextContainer[0].innerHTML = selectedText;
-      ctx.lineTo(endColumn * 40 - 20, endRow * 40 - 20);
+      ctx.lineTo(endColumn * 48 - 20, endRow * 48 - 20);
      }
      else {
       selectedText = startLetter;
       selectedTextContainer[0].innerHTML = selectedText;
-      ctx.lineTo(startColumn * 40 - 20, startRow * 40 - 20);
+      ctx.lineTo(startColumn * 48 - 20, startRow * 48 - 20);
      }
      ctx.stroke();
     }
@@ -611,8 +611,8 @@
      ctx.clearRect(0, 0, 480, 480);
      for(let i = 0; i < correctLines.length; ++i) {
       ctx.beginPath();
-      ctx.moveTo(correctLines[i][0][1] * 40 - 20, correctLines[i][0][0] * 40 - 20);
-      ctx.lineTo(correctLines[i][1][1] * 40 - 20, correctLines[i][1][0] * 40 - 20);
+      ctx.moveTo(correctLines[i][0][1] * 48 - 20, correctLines[i][0][0] * 48 - 20);
+      ctx.lineTo(correctLines[i][1][1] * 48 - 20, correctLines[i][1][0] * 48 - 20);
       ctx.stroke();
       ctx.closePath();
      }
@@ -654,8 +654,8 @@
     ctx.clearRect(0, 0, 480, 480);
     for(let i = 0; i < correctLines.length; ++i) {
      ctx.beginPath();
-     ctx.moveTo(correctLines[i][0][1] * 40 - 20, correctLines[i][0][0] * 40 - 20);
-     ctx.lineTo(correctLines[i][1][1] * 40 - 20, correctLines[i][1][0] * 40 - 20);
+     ctx.moveTo(correctLines[i][0][1] * 48 - 20, correctLines[i][0][0] * 48 - 20);
+     ctx.lineTo(correctLines[i][1][1] * 48 - 20, correctLines[i][1][0] * 48 - 20);
      ctx.stroke();
      ctx.closePath();
     }
@@ -682,8 +682,6 @@
 <style>
  body .wordSearchContainer .wordSearchGrid {
    display: flex;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);
     margin-bottom: 10px;
     position: relative;
     flex-direction: row;
