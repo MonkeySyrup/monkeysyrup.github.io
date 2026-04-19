@@ -680,7 +680,7 @@
 
 
 <style>
- .wordSearchContainer {
+ body .wordSearchContainer .wordSearchGrid {
    display: flex;
     grid-template-columns: repeat(12, 40px);
     grid-template-rows: repeat(12, 40px);
@@ -694,7 +694,7 @@
     max-height: 480px;
     height: 100%;
  }
- .wordSearchContainer .gridItem {
+ body .wordSearchContainer .wordSearchGrid .gridItem {
    flex: 1 1 8%;
  }
 </style>
