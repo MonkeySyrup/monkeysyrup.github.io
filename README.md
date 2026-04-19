@@ -4,6 +4,9 @@
 </script>
 
 <style>
+ .container-lg {
+  padding: 0 !important;
+ }
  body {
   display: flex;
   justify-content: center;
@@ -24,7 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 15px;
+  top: 20px;
   left: 10px;
   width: 36px;
   height: 36px;
