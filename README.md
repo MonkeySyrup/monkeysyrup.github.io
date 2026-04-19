@@ -57,8 +57,8 @@
   position: relative;
  }
  .wordSearchContainer .wordSearchGrid .gridItem {
-  max-width: 40px;
-  max-height: 40px;
+  max-width: 48px;
+  max-height: 48px;
   width: 100%;
   height: 100%;
   text-transform: uppercase;
@@ -70,7 +70,7 @@
   justify-content: center;
   cursor: default;
 
-  font-size: 24px;
+  font-size: 31px;
 
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none;    /* Firefox */
