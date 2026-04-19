@@ -689,6 +689,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    min-width: 300px;
     max-width: 480px;
     width: 100%;
     max-height: 480px;
