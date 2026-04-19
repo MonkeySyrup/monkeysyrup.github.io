@@ -316,7 +316,6 @@
   var selectedTextContainer = $('.selectedText');
   var canvasWidth = $('.wordSearchContainer .wordSearchGrid')[0].clientWidth;
   var canvasHeight = $('.wordSearchContainer .wordSearchGrid')[0].clientHeight;
-  console.log($('.wordSearchContainer .wordSearchGrid .gridItem'));
   var gridItemWidth = $('.wordSearchContainer .wordSearchGrid .gridItem').outerWidth();
   $('#canvas').prop({ width: canvasWidth, height: canvasHeight });
   var c = document.getElementById("canvas");
