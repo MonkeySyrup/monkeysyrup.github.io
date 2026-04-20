@@ -162,6 +162,11 @@
    <span>rankovė</span>
    <span>skaičius</span>
    <span>uodas</span>
+   <span>orkestras</span>
+   <span>vikrūnas</span>
+   <span>šriftas</span>
+   <span>žūklė</span>
+   <span>betonas</span>
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
