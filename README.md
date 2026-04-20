@@ -165,7 +165,6 @@
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
-    <span class="congratulationsText">SVEIKINAME!</span>
     <span class="resultsTitle">JŪSŲ REZULTATAS:</span>
     <span class="resultText">0/0</span>
     <span class="timeSpentText">00:00</span>
