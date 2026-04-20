@@ -382,7 +382,7 @@
       continueVertical = false;
      }
 
-     
+    
      var newDiagonalRightIndex = hintStartIndex + (columnsNumber * i) + i;
      var newDiagonalRightRow = Math.ceil(newDiagonalRightIndex / columnsNumber);
      var newDiagonalRightColumn = newDiagonalRightIndex % columnsNumber;
@@ -398,7 +398,6 @@
      else {
       continueDiagonalRight = false;
      }
-
 
      var newDiagonalLeftIndex = hintStartIndex + (columnsNumber * i) - i;
      var newDiagonalLeftRow = Math.ceil(newDiagonalLeftIndex / columnsNumber);
@@ -416,10 +415,6 @@
       continueDiagonalLeft = false;
      }
 
-
-
-
-     
      if(!continueHorizontal && !continueVertical && !continueDiagonalRight && !continueDiagonalLeft) {
       break;
      }
