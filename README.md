@@ -175,7 +175,7 @@
 
 <script>
  var letters = 'ąčęėįšųūžqwertyuiopasdfghjklzxcvbnm';
- var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas'];
+ var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas', 'orkestras', 'vikrūnas', 'šriftas', 'žūklė', 'betonas'];
  var totalWords = words.length;
  var hintsUsed = 0;
  var columnsNumber = 10;
