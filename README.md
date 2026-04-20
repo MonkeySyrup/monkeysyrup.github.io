@@ -162,11 +162,6 @@
    <span>rankovė</span>
    <span>skaičius</span>
    <span>uodas</span>
-   <span>orkestras</span>
-   <span>vikrūnas</span>
-   <span>šriftas</span>
-   <span>žūklė</span>
-   <span>betonas</span>
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
@@ -180,7 +175,7 @@
 
 <script>
  var letters = 'ąčęėįšųūžqwertyuiopasdfghjklzxcvbnm';
- var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas', 'orkestras', 'vikrūnas', 'šriftas', 'žūklė', 'betonas'];
+ var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas'];
  var totalWords = words.length;
  var hintsUsed = 0;
  var columnsNumber = 10;
