@@ -156,7 +156,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   border-radius: 50px;
   box-sizing: border-box;
   font-size: 20px;
