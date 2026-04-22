@@ -145,6 +145,11 @@
   font-size: 32px;
   text-align: center;
  }
+ .wordSearchContainer .finishGameOverlay .finishGameTable .closeOverlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+ }
 </style>
 
 <div class="mainbar">
@@ -167,6 +172,7 @@
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
+    <div class="closeOverlay"></div>
     <span class="resultsTitle">JŪSŲ REZULTATAS:</span>
     <span class="resultText">0/0</span>
     <span class="timeSpentText">00:00</span>
