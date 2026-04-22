@@ -111,7 +111,7 @@
   font-size: 24px;
  }
  .wordSearchContainer .wordsList span.found {
-  text-decoration: line-through 5px #ff0000;
+  text-decoration: line-through 5px rgb(0, 255, 0);
  }
  .wordSearchContainer .finishGameOverlay {
   display: none;
@@ -320,7 +320,7 @@
   var c = document.getElementById("canvas");
   var ctx = c.getContext("2d");
   ctx.lineWidth = gridItemWidth;
-  ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.strokeStyle = 'rgba(0, 255, 0, 0.5)';
   ctx.lineCap = 'round';
 
   var correctLines = [];  
