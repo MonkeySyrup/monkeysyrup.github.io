@@ -193,6 +193,7 @@
  var index = 0;
  while(index < maxWords) {
   var word = words[Math.floor(Math.random() * words.length)]
+  var originalWord = word;
 
   var wordReady = false;
   var randomRow = Math.floor(Math.random() * columnsNumber);
@@ -200,14 +201,23 @@
 
   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
    //var directions = [1, 2, 3, 4, 5, 6, 7, 8];
-   var directions = [4];
+   var directions = [1];
    while(directions.length) {
     var direction = directions[Math.floor(Math.random() * directions.length)]
+    var toReverse = Math.floor(Math.random() * 2)
+    console.log(toReverse);
+    if(toReverse) {
+     var reversedWord = '';
+     for(var i = word.length - 1; i >= 0; i--) {
+       reversedWord += word[i];
+     }
+     word = reversedWord;
+    }
     var tempWordsGrid = wordsGrid.map(function(arr) {
      return arr.slice();
     });
     switch(direction) {
-     case 0: //horizontal right
+     case 0: //horizontal
       if(word.length + randomColumn <= columnsNumber) {
        var allGood = true;
        var currentRow = randomRow;
@@ -228,7 +238,7 @@
       }
  
       break;
-     case 1: //vertical down
+     case 1: //vertical
       if(word.length + randomRow <= columnsNumber) {
        var allGood = true;
        var currentRow = randomRow;
@@ -249,7 +259,7 @@
       }
  
       break;
-     case 2: //diagonal down left
+     case 2: //diagonal down left/top right
       if(word.length <= randomColumn + 1 && word.length + randomRow <= columnsNumber) {
        var allGood = true;
        var currentRow = randomRow;
@@ -271,7 +281,7 @@
       }
  
       break;
-     case 3: // diagonal down right
+     case 3: // diagonal down right/top left
       if(word.length <= (columnsNumber - randomColumn) && word.length + randomRow <= columnsNumber) {
        var allGood = true;
        var currentRow = randomRow;
@@ -293,38 +303,17 @@
       }
  
       break;
-     case 4: // horizontal left
-      if(word.length - randomColumn >= 0) {
-       var allGood = true;
-       var currentRow = randomRow;
-       var currentColumn = randomColumn;
-       for(let i = 0; i < word.length ; ++i) {
-        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
-         tempWordsGrid[currentRow][currentColumn] = word[i];
-         currentColumn--;
-        }
-        else {
-         allGood = false
-         break;
-        }
-       }
-       if(allGood) {
-        wordReady = true;
-       }
-      }
- 
-      break;
      default:
       
     }
     if(wordReady) {
      index++;
      usedWords.push(word);
-     var wordIndex = words.indexOf(word);
+     var wordIndex = words.indexOf(originalWord);
      if (wordIndex !== -1) {
       words.splice(wordIndex, 1);
      }
-     $('.wordsList').append('<span>' + word + '</span>')
+     $('.wordsList').append('<span>' + originalWord + '</span>')
      wordsGrid = tempWordsGrid.map(function(arr) {
       return arr.slice();
      });
