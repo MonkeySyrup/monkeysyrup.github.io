@@ -386,7 +386,7 @@
   }, 1000);
 
   $('.wordSearchContainer .hintButton').on('click', function() {
-   if(usedWords) {
+   if(!usedWords || !usedWords.length) {
     var hintsCounting = 0;
        
     var hintWord = usedWords[Math.floor(Math.random()*usedWords.length)];
@@ -698,7 +698,7 @@
    }
   });
   function checkForEndGame() {
-   if (!usedWords || !usedWords.length) {
+   if(!usedWords || !usedWords.length) {
     clearInterval(timerInterval);
     gameCompleted = true;
     $('.wordSearchContainer .finishGameOverlay .resultText')[0].innerHTML = (totalWords - hintsUsed) + '/' + totalWords;
