@@ -157,11 +157,11 @@
   </div>
   <span class="selectedText"></span>
   <div class="wordsList">
-   <span>kantrybė</span>
-   <span>marmeladas</span>
-   <span>rankovė</span>
-   <span>skaičius</span>
-   <span>uodas</span>
+   //<span>kantrybė</span>
+   //<span>marmeladas</span>
+   //<span>rankovė</span>
+   //<span>skaičius</span>
+   //<span>uodas</span>
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
@@ -175,11 +175,12 @@
 
 <script>
  var letters = 'ąčęėįšųūžqwertyuiopasdfghjklzxcvbnm';
- var words = ['kantrybė', 'marmeladas', 'rankovė', 'skaičius', 'uodas'];
- var totalWords = words.length;
+ var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
+ var usedWords = [];
  var hintsUsed = 0;
  var columnsNumber = 10;
  var wordsGrid = [];
+ var maxWords = 5;
  for(let i = 0; i < columnsNumber; ++i) {
   var row = [];
   for(let j = 0; j < columnsNumber; ++j) {
@@ -188,118 +189,120 @@
   wordsGrid.push(row);
  }
  var index = 0;
- $(words).each(function() {
-  var wordReady = false;
-  while(!wordReady) {
-   wordReady = false;
-   var randomRow = Math.floor(Math.random() * columnsNumber);
-   var randomColumn = Math.floor(Math.random() * columnsNumber);
+ while(index < maxWords) {
+  var word = words[Math.floor(Math.random() * words.length)]
+  
+  var randomRow = Math.floor(Math.random() * columnsNumber);
+  var randomColumn = Math.floor(Math.random() * columnsNumber);
 
-   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == this[0]) {
-    var direction = Math.floor(Math.random() * 4);
-    var tempWordsGrid = wordsGrid.map(function(arr) {
+  if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
+   var direction = Math.floor(Math.random() * 4);
+   var tempWordsGrid = wordsGrid.map(function(arr) {
+    return arr.slice();
+   });
+   switch(direction) {
+    case 0: //horizontal
+     if(word.length + randomColumn <= columnsNumber) {
+      var allGood = true;
+      var currentRow = randomRow;
+      var currentColumn = randomColumn;
+      for(let i = 0; i < word.length ; ++i) {
+       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+        tempWordsGrid[currentRow][currentColumn] = word[i];
+        currentColumn++;
+       }
+       else {
+        allGood = false
+        break;
+       }
+      }
+      if(allGood) {
+       wordReady = true;
+      }
+     }
+
+     break;
+    case 1: //vertical
+     if(word.length + randomRow <= columnsNumber) {
+      var allGood = true;
+      var currentRow = randomRow;
+      var currentColumn = randomColumn;
+      for(let i = 0; i < word.length ; ++i) {
+       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+        tempWordsGrid[currentRow][currentColumn] = word[i];
+        currentRow++;
+       }
+       else {
+        allGood = false
+        break;
+       }
+      }
+      if(allGood) {
+       wordReady = true;
+      }
+     }
+
+     break;
+    case 2: //diagonal left
+     if(word.length <= randomColumn + 1 && word.length + randomRow <= columnsNumber) {
+      var allGood = true;
+      var currentRow = randomRow;
+      var currentColumn = randomColumn;
+      for(let i = 0; i < word.length ; ++i) {
+       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+        tempWordsGrid[currentRow][currentColumn] = word[i];
+        currentRow++;
+        currentColumn--;
+       }
+       else {
+        allGood = false
+        break;
+       }
+      }
+      if(allGood) {
+       wordReady = true;
+      }
+     }
+
+     break;
+    case 3: // diagonal right
+     if(word.length <= (columnsNumber - randomColumn) && word.length + randomRow <= columnsNumber) {
+      var allGood = true;
+      var currentRow = randomRow;
+      var currentColumn = randomColumn;
+      for(let i = 0; i < word.length ; ++i) {
+       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+        tempWordsGrid[currentRow][currentColumn] = word[i];
+        currentRow++;
+        currentColumn++;
+       }
+       else {
+        allGood = false
+        break;
+       }
+      }
+      if(allGood) {
+       wordReady = true;
+      }
+     }
+
+     break;
+    default:
+     
+   }
+   if(wordReady) {
+    index++;
+    usedWords.push(word);
+    words.splice(words.indexOf(word), 1);
+    $('.wordsList').append('<span>' + word + '</span>')
+    wordsGrid = tempWordsGrid.map(function(arr) {
      return arr.slice();
     });
-    switch(direction) {
-     case 0: //horizontal
-      if($(this).length + randomColumn <= columnsNumber) {
-       var allGood = true;
-       var currentRow = randomRow;
-       var currentColumn = randomColumn;
-       for(let i = 0; i < $(this).length ; ++i) {
-        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == this[i]) {
-         tempWordsGrid[currentRow][currentColumn] = this[i];
-         currentColumn++;
-        }
-        else {
-         allGood = false
-         break;
-        }
-       }
-       if(allGood) {
-        wordReady = true;
-       }
-      }
-
-      break;
-     case 1: //vertical
-      if($(this).length + randomRow <= columnsNumber) {
-       var allGood = true;
-       var currentRow = randomRow;
-       var currentColumn = randomColumn;
-       for(let i = 0; i < $(this).length ; ++i) {
-        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == this[i]) {
-         tempWordsGrid[currentRow][currentColumn] = this[i];
-         currentRow++;
-        }
-        else {
-         allGood = false
-         break;
-        }
-       }
-       if(allGood) {
-        wordReady = true;
-       }
-      }
-
-      break;
-     case 2: //diagonal left
-      if($(this).length <= randomColumn + 1 && $(this).length + randomRow <= columnsNumber) {
-       var allGood = true;
-       var currentRow = randomRow;
-       var currentColumn = randomColumn;
-       for(let i = 0; i < $(this).length ; ++i) {
-        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == this[i]) {
-         tempWordsGrid[currentRow][currentColumn] = this[i];
-         currentRow++;
-         currentColumn--;
-        }
-        else {
-         allGood = false
-         break;
-        }
-       }
-       if(allGood) {
-        wordReady = true;
-       }
-      }
-
-      break;
-     case 3: // diagonal right
-      if($(this).length <= (columnsNumber - randomColumn) && $(this).length + randomRow <= columnsNumber) {
-       var allGood = true;
-       var currentRow = randomRow;
-       var currentColumn = randomColumn;
-       for(let i = 0; i < $(this).length ; ++i) {
-        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == this[i]) {
-         tempWordsGrid[currentRow][currentColumn] = this[i];
-         currentRow++;
-         currentColumn++;
-        }
-        else {
-         allGood = false
-         break;
-        }
-       }
-       if(allGood) {
-        wordReady = true;
-       }
-      }
-
-      break;
-     default:
-      
-    }
-    if(wordReady) {
-     wordsGrid = tempWordsGrid.map(function(arr) {
-      return arr.slice();
-     });
-     index++;
-    }
    }
   }
- });
- 
+ }
+
+ var totalWords = usedWords.length;
  var lettersString = 'ąčęėįšųūžabcdefghijklmnoprstuvyz';
  for(let i = 0; i < columnsNumber; ++i) {
   for(let j = 0; j < columnsNumber; ++j) {
