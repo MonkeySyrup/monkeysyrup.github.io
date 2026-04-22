@@ -201,7 +201,9 @@
 
   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
    var directions = [0, 1, 2, 3];
-   while(directions.length) {
+   var maxDirections = directions.length
+   var directionsUsed = 0;
+   while(directionsUsed < maxDirections) {
     var direction = directions[Math.floor(Math.random() * directions.length)]
     var toReverse = Math.floor(Math.random() * 2)
     if(toReverse) {
@@ -318,6 +320,7 @@
      break;
     }
     directions.splice(directions.indexOf(direction), 1);
+    directionsUsed++;
    }
   }
  }
