@@ -162,6 +162,7 @@
   font-size: 20px;
   color: #fff;
   font-weight: 700;
+  cursor: pointer;
  }
 </style>
 
@@ -735,6 +736,9 @@
      $('html').css('overflow', 'auto');
     }
    }
+  });
+  $('.finishGameTable .closeOverlay').on('click', function() {
+   $(this).closest('.finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight).hide();
   });
  });
 </script>
