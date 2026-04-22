@@ -200,8 +200,7 @@
   var randomColumn = Math.floor(Math.random() * columnsNumber);
 
   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
-   //var directions = [1, 2, 3, 4, 5, 6, 7, 8];
-   var directions = [1];
+   var directions = [0, 1, 2, 3];
    while(directions.length) {
     var direction = directions[Math.floor(Math.random() * directions.length)]
     var toReverse = Math.floor(Math.random() * 2)
