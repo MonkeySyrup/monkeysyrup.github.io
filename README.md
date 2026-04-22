@@ -201,7 +201,7 @@
 
   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
    var directions = [0, 1, 2, 3];
-   var maxDirections = directions.length
+   var directionsLength = directions.length
    var directionsUsed = 0;
    while(directionsUsed < directionsLength) {
     var direction = directions[Math.floor(Math.random() * directionsLength)]
