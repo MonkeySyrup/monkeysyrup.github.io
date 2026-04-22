@@ -364,128 +364,146 @@
   }, 1000);
 
   $('.wordSearchContainer .hintButton').on('click', function() {
+   var hintsCounting = 0;
+   
    var hintWord = usedWords[Math.floor(Math.random()*usedWords.length)];
-   $('.wordSearchContainer .gridItem:contains(' + hintWord[0] + ')').each(function() {
-    var hintStartIndex = parseInt($(this).attr('data-index'));
-    var hintStartRow = Math.ceil(hintStartIndex / columnsNumber);
-    var hintStartColumn = hintStartIndex % columnsNumber;
-    if(hintStartColumn == 0) {
-     hintStartColumn = columnsNumber;
+   var originalHintWord = hintWord;
+   var wordFound = 0;
+   while(hintsCounting < 2) {
+    if(hintsCounting == 1) {
+     var reversedHintWord = '';
+     for(var i = hintWord.length - 1; i >= 0; i--) {
+       reversedHintWord += hintWord[i];
+     }
+     hintWord = reversedHintWord;
     }
-    var hintEndRow = 0;
-    var hintEndColumn = 0;
-    var continueHorizontal = true;
-    var continueVertical = true;
-    var continueDiagonalRight = true;
-    var continueDiagonalLeft = true;
-    for(let i = 0; i < hintWord.length; ++i) {
-     var newHorizontalIndex = hintStartIndex + i;
-     var newHorizontalRow = Math.ceil(newHorizontalIndex / columnsNumber);
-
-     if(newHorizontalIndex <= columnsNumber * columnsNumber) {
-      if(continueHorizontal && (hintStartRow != newHorizontalRow || $('.wordSearchContainer .gridItem[data-index=' + newHorizontalIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newHorizontalIndex + ']')[0].innerHTML)) {
-       continueHorizontal = false;
-      }
+    $('.wordSearchContainer .gridItem:contains(' + hintWord[0] + ')').each(function() {
+     var hintStartIndex = parseInt($(this).attr('data-index'));
+     var hintStartRow = Math.ceil(hintStartIndex / columnsNumber);
+     var hintStartColumn = hintStartIndex % columnsNumber;
+     if(hintStartColumn == 0) {
+      hintStartColumn = columnsNumber;
      }
-     else {
-      continueHorizontal = false;
-     }
-     
-     var newVerticalIndex = hintStartIndex + (columnsNumber * i);
-     var newVerticalColumn = newVerticalIndex % columnsNumber;
-     if(newVerticalColumn == 0) {
-      newVerticalColumn = columnsNumber;
-     }
-      
-     if(newVerticalIndex <= columnsNumber * columnsNumber) {
-      if(continueVertical && (hintStartColumn != newVerticalColumn || $('.wordSearchContainer .gridItem[data-index=' + newVerticalIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newVerticalIndex + ']')[0].innerHTML)) {
-       continueVertical = false;
-      }
-     }
-     else {
-      continueVertical = false;
-     }
-
-    
-     var newDiagonalRightIndex = hintStartIndex + (columnsNumber * i) + i;
-     var newDiagonalRightRow = Math.ceil(newDiagonalRightIndex / columnsNumber);
-     var newDiagonalRightColumn = newDiagonalRightIndex % columnsNumber;
-     if(newDiagonalRightColumn == 0) {
-      newDiagonalRightColumn = columnsNumber;
-     }
-      
-     if(newDiagonalRightIndex <= columnsNumber * columnsNumber) {
-      if(continueDiagonalRight && ($('.wordSearchContainer .gridItem[data-index=' + newDiagonalRightIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newDiagonalRightIndex + ']')[0].innerHTML)) {
-       continueDiagonalRight = false;
-      }
-     }
-     else {
-      continueDiagonalRight = false;
-     }
-
-     var newDiagonalLeftIndex = hintStartIndex + (columnsNumber * i) - i;
-     var newDiagonalLeftRow = Math.ceil(newDiagonalLeftIndex / columnsNumber);
-     var newDiagonalLeftColumn = newDiagonalLeftIndex % columnsNumber;
-     if(newDiagonalLeftColumn == 0) {
-      newDiagonalLeftColumn = columnsNumber;
-     }
-      
-     if(newDiagonalLeftIndex <= columnsNumber * columnsNumber) {
-      if(continueDiagonalLeft && ($('.wordSearchContainer .gridItem[data-index=' + newDiagonalLeftIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newDiagonalLeftIndex + ']')[0].innerHTML)) {
-       continueDiagonalLeft = false;
-      }
-     }
-     else {
-      continueDiagonalLeft = false;
-     }
-
-     if(!continueHorizontal && !continueVertical && !continueDiagonalRight && !continueDiagonalLeft) {
-      break;
-     }
-
-     if(i == hintWord.length - 1) {
-      if(continueHorizontal) {
-       hintEndRow = hintStartRow;
-       hintEndColumn = newHorizontalIndex % columnsNumber;
-       if(hintEndColumn == 0) {
-        hintEndColumn = columnsNumber;
+     var hintEndRow = 0;
+     var hintEndColumn = 0;
+     var continueHorizontal = true;
+     var continueVertical = true;
+     var continueDiagonalRight = true;
+     var continueDiagonalLeft = true;
+     for(let i = 0; i < hintWord.length; ++i) {
+      var newHorizontalIndex = hintStartIndex + i;
+      var newHorizontalRow = Math.ceil(newHorizontalIndex / columnsNumber);
+ 
+      if(newHorizontalIndex <= columnsNumber * columnsNumber) {
+       if(continueHorizontal && (hintStartRow != newHorizontalRow || $('.wordSearchContainer .gridItem[data-index=' + newHorizontalIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newHorizontalIndex + ']')[0].innerHTML)) {
+        continueHorizontal = false;
        }
       }
-      else if(continueVertical) {
-       hintEndRow = Math.ceil(newVerticalIndex / columnsNumber);
-       hintEndColumn = hintStartColumn;
+      else {
+       continueHorizontal = false;
       }
-      else if(continueDiagonalRight) {
-       hintEndRow = newDiagonalRightRow;
-       hintEndColumn = newDiagonalRightColumn;
+      
+      var newVerticalIndex = hintStartIndex + (columnsNumber * i);
+      var newVerticalColumn = newVerticalIndex % columnsNumber;
+      if(newVerticalColumn == 0) {
+       newVerticalColumn = columnsNumber;
       }
-      else if(continueDiagonalLeft) {
-       hintEndRow = newDiagonalLeftRow;
-       hintEndColumn = newDiagonalLeftColumn;
+       
+      if(newVerticalIndex <= columnsNumber * columnsNumber) {
+       if(continueVertical && (hintStartColumn != newVerticalColumn || $('.wordSearchContainer .gridItem[data-index=' + newVerticalIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newVerticalIndex + ']')[0].innerHTML)) {
+        continueVertical = false;
+       }
+      }
+      else {
+       continueVertical = false;
+      }
+ 
+     
+      var newDiagonalRightIndex = hintStartIndex + (columnsNumber * i) + i;
+      var newDiagonalRightRow = Math.ceil(newDiagonalRightIndex / columnsNumber);
+      var newDiagonalRightColumn = newDiagonalRightIndex % columnsNumber;
+      if(newDiagonalRightColumn == 0) {
+       newDiagonalRightColumn = columnsNumber;
+      }
+       
+      if(newDiagonalRightIndex <= columnsNumber * columnsNumber) {
+       if(continueDiagonalRight && ($('.wordSearchContainer .gridItem[data-index=' + newDiagonalRightIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newDiagonalRightIndex + ']')[0].innerHTML)) {
+        continueDiagonalRight = false;
+       }
+      }
+      else {
+       continueDiagonalRight = false;
+      }
+ 
+      var newDiagonalLeftIndex = hintStartIndex + (columnsNumber * i) - i;
+      var newDiagonalLeftRow = Math.ceil(newDiagonalLeftIndex / columnsNumber);
+      var newDiagonalLeftColumn = newDiagonalLeftIndex % columnsNumber;
+      if(newDiagonalLeftColumn == 0) {
+       newDiagonalLeftColumn = columnsNumber;
+      }
+       
+      if(newDiagonalLeftIndex <= columnsNumber * columnsNumber) {
+       if(continueDiagonalLeft && ($('.wordSearchContainer .gridItem[data-index=' + newDiagonalLeftIndex + ']').length == 0 || hintWord[i] != $('.wordSearchContainer .gridItem[data-index=' + newDiagonalLeftIndex + ']')[0].innerHTML)) {
+        continueDiagonalLeft = false;
+       }
+      }
+      else {
+       continueDiagonalLeft = false;
+      }
+ 
+      if(!continueHorizontal && !continueVertical && !continueDiagonalRight && !continueDiagonalLeft) {
+       break;
+      }
+ 
+      if(i == hintWord.length - 1) {
+       if(continueHorizontal) {
+        hintEndRow = hintStartRow;
+        hintEndColumn = newHorizontalIndex % columnsNumber;
+        if(hintEndColumn == 0) {
+         hintEndColumn = columnsNumber;
+        }
+       }
+       else if(continueVertical) {
+        hintEndRow = Math.ceil(newVerticalIndex / columnsNumber);
+        hintEndColumn = hintStartColumn;
+       }
+       else if(continueDiagonalRight) {
+        hintEndRow = newDiagonalRightRow;
+        hintEndColumn = newDiagonalRightColumn;
+       }
+       else if(continueDiagonalLeft) {
+        hintEndRow = newDiagonalLeftRow;
+        hintEndColumn = newDiagonalLeftColumn;
+       }
       }
      }
-    }
-    
-    
-    if(hintEndRow != 0 && hintEndColumn != 0) {
-     hintsUsed++;
-     ctx.beginPath();
-     ctx.moveTo(hintStartColumn * gridItemWidth - (gridItemWidth / 2), hintStartRow * gridItemWidth - (gridItemWidth / 2));
-     ctx.lineTo(hintEndColumn * gridItemWidth - (gridItemWidth / 2), hintEndRow * gridItemWidth - (gridItemWidth / 2));
-     ctx.stroke();
-     ctx.closePath();
-
-     correctLines.push([[hintStartRow, hintStartColumn], [hintEndRow, hintEndColumn]]);
-     var index = usedWords.indexOf(hintWord);
-     if (index !== -1) {
-      usedWords.splice(index, 1);
+     
+     
+     if(hintEndRow != 0 && hintEndColumn != 0) {
+      wordFound = true;
+      hintsUsed++;
+      ctx.beginPath();
+      ctx.moveTo(hintStartColumn * gridItemWidth - (gridItemWidth / 2), hintStartRow * gridItemWidth - (gridItemWidth / 2));
+      ctx.lineTo(hintEndColumn * gridItemWidth - (gridItemWidth / 2), hintEndRow * gridItemWidth - (gridItemWidth / 2));
+      ctx.stroke();
+      ctx.closePath();
+ 
+      correctLines.push([[hintStartRow, hintStartColumn], [hintEndRow, hintEndColumn]]);
+      var index = usedWords.indexOf(originalHintWord);
+      if (index !== -1) {
+       usedWords.splice(index, 1);
+      }
+      $('.wordSearchContainer .wordsList span:contains(' + originalHintWord.toLowerCase() + ')').addClass('found');
+ 
+      checkForEndGame();
+      return false;
      }
-     $('.wordSearchContainer .wordsList span:contains(' + hintWord.toLowerCase() + ')').addClass('found');
-
-     checkForEndGame();
-     return false;
-    }
-   });
+    });
+   }
+   if(wordFound) {
+    return false;
+   }
+   hintsCounting++;
   });
 
   var startRow = 0;
