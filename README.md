@@ -125,6 +125,7 @@
   justify-content: center;
  }
  .wordSearchContainer .finishGameOverlay .finishGameTable {
+  position: relative;
   display: flex;
   width: fit-content;
   height: fit-content;
@@ -144,11 +145,23 @@
  .wordSearchContainer .finishGameOverlay .finishGameTable span.resultsTitle {
   font-size: 32px;
   text-align: center;
+  margin-top: 30px;
  }
  .wordSearchContainer .finishGameOverlay .finishGameTable .closeOverlay {
   position: absolute;
   top: 10px;
   right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
  }
 </style>
 
@@ -172,7 +185,7 @@
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
-    <div class="closeOverlay"></div>
+    <div class="closeOverlay">X</div>
     <span class="resultsTitle">JŪSŲ REZULTATAS:</span>
     <span class="resultText">0/0</span>
     <span class="timeSpentText">00:00</span>
