@@ -296,7 +296,10 @@
    if(wordReady) {
     index++;
     usedWords.push(word);
-    words.splice(words.indexOf(word), 1);
+    var index = words.indexOf(word);
+     if (index !== -1) {
+      words.splice(index, 1);
+     }
     $('.wordsList').append('<span>' + word + '</span>')
     wordsGrid = tempWordsGrid.map(function(arr) {
      return arr.slice();
@@ -346,7 +349,7 @@
   }, 1000);
 
   $('.wordSearchContainer .hintButton').on('click', function() {
-   var hintWord = words[Math.floor(Math.random()*words.length)];
+   var hintWord = words[Math.floor(Math.random()*usedWords.length)];
    $('.wordSearchContainer .gridItem:contains(' + hintWord[0] + ')').each(function() {
     var hintStartIndex = parseInt($(this).attr('data-index'));
     var hintStartRow = Math.ceil(hintStartIndex / columnsNumber);
@@ -458,9 +461,9 @@
      ctx.closePath();
 
      correctLines.push([[hintStartRow, hintStartColumn], [hintEndRow, hintEndColumn]]);
-     var index = words.indexOf(hintWord);
+     var index = usedWords.indexOf(hintWord);
      if (index !== -1) {
-      words.splice(index, 1);
+      usedWords.splice(index, 1);
      }
      $('.wordSearchContainer .wordsList span:contains(' + hintWord.toLowerCase() + ')').addClass('found');
 
@@ -604,11 +607,11 @@
    if(startDrawing) {
     startDrawing = false;
 
-    if(words.includes(selectedText)) {
+    if(usedWords.includes(selectedText)) {
      correctLines.push([[startRow, startColumn], [endRow, endColumn]]);
-     var index = words.indexOf(selectedText);
+     var index = usedWords.indexOf(selectedText);
      if (index !== -1) {
-      words.splice(index, 1);
+      usedWords.splice(index, 1);
      }
      $('.wordSearchContainer .wordsList span:contains(' + selectedText.toLowerCase() + ')').addClass('found');
     }
@@ -638,7 +641,7 @@
    }
   });
   function checkForEndGame() {
-   if (!words || !words.length) {
+   if (!usedWords || !usedWords.length) {
     clearInterval(timerInterval);
     gameCompleted = true;
     $('.wordSearchContainer .finishGameOverlay .resultText')[0].innerHTML = (totalWords - hintsUsed) + '/' + totalWords;
