@@ -202,7 +202,7 @@
    //var directions = [1, 2, 3, 4, 5, 6, 7, 8];
    var directions = [4];
    while(directions.length) {
-    var direction = Math.floor(Math.random() * directions.length);
+    var direction = directions[Math.floor(Math.random() * directions.length)]
     var tempWordsGrid = wordsGrid.map(function(arr) {
      return arr.slice();
     });
@@ -294,8 +294,6 @@
  
       break;
      case 4: // horizontal left
-      console.log(word.length);
-      console.log(randomColumn);
       if(word.length - randomColumn >= 0) {
        var allGood = true;
        var currentRow = randomRow;
