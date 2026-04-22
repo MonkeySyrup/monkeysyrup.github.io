@@ -203,8 +203,8 @@
    var directions = [0, 1, 2, 3];
    var maxDirections = directions.length
    var directionsUsed = 0;
-   while(directionsUsed < maxDirections) {
-    var direction = directions[Math.floor(Math.random() * directions.length)]
+   while(directionsUsed < directionsLength) {
+    var direction = directions[Math.floor(Math.random() * directionsLength)]
     var toReverse = Math.floor(Math.random() * 2)
     if(toReverse) {
      var reversedWord = '';
