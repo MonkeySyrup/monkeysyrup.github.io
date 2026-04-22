@@ -294,6 +294,8 @@
  
       break;
      case 4: // horizontal left
+      console.log(word.length);
+      console.log(randomColumn);
       if(word.length - randomColumn >= 0) {
        var allGood = true;
        var currentRow = randomRow;
