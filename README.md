@@ -199,111 +199,138 @@
   var randomColumn = Math.floor(Math.random() * columnsNumber);
 
   if(wordsGrid[randomRow][randomColumn] == ':' || wordsGrid[randomRow][randomColumn] == word[0]) {
-   var direction = Math.floor(Math.random() * 4);
-   var tempWordsGrid = wordsGrid.map(function(arr) {
-    return arr.slice();
-   });
-   switch(direction) {
-    case 0: //horizontal
-     if(word.length + randomColumn <= columnsNumber) {
-      var allGood = true;
-      var currentRow = randomRow;
-      var currentColumn = randomColumn;
-      for(let i = 0; i < word.length ; ++i) {
-       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
-        tempWordsGrid[currentRow][currentColumn] = word[i];
-        currentColumn++;
+   //var directions = [1, 2, 3, 4, 5, 6, 7, 8];
+   var directions = [4];
+   while(directions.length) {
+    var direction = Math.floor(Math.random() * directions.length);
+    var tempWordsGrid = wordsGrid.map(function(arr) {
+     return arr.slice();
+    });
+    switch(direction) {
+     case 0: //horizontal right
+      if(word.length + randomColumn <= columnsNumber) {
+       var allGood = true;
+       var currentRow = randomRow;
+       var currentColumn = randomColumn;
+       for(let i = 0; i < word.length ; ++i) {
+        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+         tempWordsGrid[currentRow][currentColumn] = word[i];
+         currentColumn++;
+        }
+        else {
+         allGood = false
+         break;
+        }
        }
-       else {
-        allGood = false
-        break;
-       }
-      }
-      if(allGood) {
-       wordReady = true;
-      }
-     }
-
-     break;
-    case 1: //vertical
-     if(word.length + randomRow <= columnsNumber) {
-      var allGood = true;
-      var currentRow = randomRow;
-      var currentColumn = randomColumn;
-      for(let i = 0; i < word.length ; ++i) {
-       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
-        tempWordsGrid[currentRow][currentColumn] = word[i];
-        currentRow++;
-       }
-       else {
-        allGood = false
-        break;
+       if(allGood) {
+        wordReady = true;
        }
       }
-      if(allGood) {
-       wordReady = true;
-      }
-     }
-
-     break;
-    case 2: //diagonal left
-     if(word.length <= randomColumn + 1 && word.length + randomRow <= columnsNumber) {
-      var allGood = true;
-      var currentRow = randomRow;
-      var currentColumn = randomColumn;
-      for(let i = 0; i < word.length ; ++i) {
-       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
-        tempWordsGrid[currentRow][currentColumn] = word[i];
-        currentRow++;
-        currentColumn--;
+ 
+      break;
+     case 1: //vertical down
+      if(word.length + randomRow <= columnsNumber) {
+       var allGood = true;
+       var currentRow = randomRow;
+       var currentColumn = randomColumn;
+       for(let i = 0; i < word.length ; ++i) {
+        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+         tempWordsGrid[currentRow][currentColumn] = word[i];
+         currentRow++;
+        }
+        else {
+         allGood = false
+         break;
+        }
        }
-       else {
-        allGood = false
-        break;
-       }
-      }
-      if(allGood) {
-       wordReady = true;
-      }
-     }
-
-     break;
-    case 3: // diagonal right
-     if(word.length <= (columnsNumber - randomColumn) && word.length + randomRow <= columnsNumber) {
-      var allGood = true;
-      var currentRow = randomRow;
-      var currentColumn = randomColumn;
-      for(let i = 0; i < word.length ; ++i) {
-       if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
-        tempWordsGrid[currentRow][currentColumn] = word[i];
-        currentRow++;
-        currentColumn++;
-       }
-       else {
-        allGood = false
-        break;
+       if(allGood) {
+        wordReady = true;
        }
       }
-      if(allGood) {
-       wordReady = true;
+ 
+      break;
+     case 2: //diagonal down left
+      if(word.length <= randomColumn + 1 && word.length + randomRow <= columnsNumber) {
+       var allGood = true;
+       var currentRow = randomRow;
+       var currentColumn = randomColumn;
+       for(let i = 0; i < word.length ; ++i) {
+        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+         tempWordsGrid[currentRow][currentColumn] = word[i];
+         currentRow++;
+         currentColumn--;
+        }
+        else {
+         allGood = false
+         break;
+        }
+       }
+       if(allGood) {
+        wordReady = true;
+       }
       }
-     }
-
-     break;
-    default:
-     
-   }
-   if(wordReady) {
-    index++;
-    usedWords.push(word);
-    var wordIndex = words.indexOf(word);
+ 
+      break;
+     case 3: // diagonal down right
+      if(word.length <= (columnsNumber - randomColumn) && word.length + randomRow <= columnsNumber) {
+       var allGood = true;
+       var currentRow = randomRow;
+       var currentColumn = randomColumn;
+       for(let i = 0; i < word.length ; ++i) {
+        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+         tempWordsGrid[currentRow][currentColumn] = word[i];
+         currentRow++;
+         currentColumn++;
+        }
+        else {
+         allGood = false
+         break;
+        }
+       }
+       if(allGood) {
+        wordReady = true;
+       }
+      }
+ 
+      break;
+     case 4: // horizontal left
+      if(word.length - randomColumn >= 0) {
+       var allGood = true;
+       var currentRow = randomRow;
+       var currentColumn = randomColumn;
+       for(let i = 0; i < word.length ; ++i) {
+        if(tempWordsGrid[currentRow][currentColumn] == ':' || tempWordsGrid[currentRow][currentColumn] == word[i]) {
+         tempWordsGrid[currentRow][currentColumn] = word[i];
+         currentColumn--;
+        }
+        else {
+         allGood = false
+         break;
+        }
+       }
+       if(allGood) {
+        wordReady = true;
+       }
+      }
+ 
+      break;
+     default:
+      
+    }
+    if(wordReady) {
+     index++;
+     usedWords.push(word);
+     var wordIndex = words.indexOf(word);
      if (wordIndex !== -1) {
       words.splice(wordIndex, 1);
      }
-    $('.wordsList').append('<span>' + word + '</span>')
-    wordsGrid = tempWordsGrid.map(function(arr) {
-     return arr.slice();
-    });
+     $('.wordsList').append('<span>' + word + '</span>')
+     wordsGrid = tempWordsGrid.map(function(arr) {
+      return arr.slice();
+     });
+     break;
+    }
+    directions.splice(directions.indexOf(direction), 1);
    }
   }
  }
