@@ -370,7 +370,7 @@
    
    var hintWord = usedWords[Math.floor(Math.random()*usedWords.length)];
    var originalHintWord = hintWord;
-   var wordFound = 0;
+   var wordFound = false;
    while(hintsCounting < 2) {
     if(hintsCounting == 1) {
      var reversedHintWord = '';
@@ -501,11 +501,11 @@
       return false;
      }
     });
+    if(wordFound) {
+     return false;
+    }
+    hintsCounting++;
    }
-   if(wordFound) {
-    return false;
-   }
-   hintsCounting++;
   });
 
   var startRow = 0;
