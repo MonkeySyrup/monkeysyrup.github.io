@@ -193,7 +193,8 @@
  var index = 0;
  while(index < maxWords) {
   var word = words[Math.floor(Math.random() * words.length)]
-  
+
+  var wordReady = false;
   var randomRow = Math.floor(Math.random() * columnsNumber);
   var randomColumn = Math.floor(Math.random() * columnsNumber);
 
