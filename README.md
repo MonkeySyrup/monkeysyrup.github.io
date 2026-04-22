@@ -296,9 +296,9 @@
    if(wordReady) {
     index++;
     usedWords.push(word);
-    var index = words.indexOf(word);
-     if (index !== -1) {
-      words.splice(index, 1);
+    var wordIndex = words.indexOf(word);
+     if (wordIndex !== -1) {
+      words.splice(wordIndex, 1);
      }
     $('.wordsList').append('<span>' + word + '</span>')
     wordsGrid = tempWordsGrid.map(function(arr) {
