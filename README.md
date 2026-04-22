@@ -157,11 +157,13 @@
   </div>
   <span class="selectedText"></span>
   <div class="wordsList">
-   //<span>kantrybė</span>
-   //<span>marmeladas</span>
-   //<span>rankovė</span>
-   //<span>skaičius</span>
-   //<span>uodas</span>
+   <!--
+   <span>kantrybė</span>
+   <span>marmeladas</span>
+   <span>rankovė</span>
+   <span>skaičius</span>
+   <span>uodas</span>
+   //-->
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
