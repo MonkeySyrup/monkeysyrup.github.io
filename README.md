@@ -376,7 +376,7 @@
   }, 1000);
 
   $('.wordSearchContainer .hintButton').on('click', function() {
-   var hintWord = words[Math.floor(Math.random()*usedWords.length)];
+   var hintWord = usedWords[Math.floor(Math.random()*usedWords.length)];
    $('.wordSearchContainer .gridItem:contains(' + hintWord[0] + ')').each(function() {
     var hintStartIndex = parseInt($(this).attr('data-index'));
     var hintStartRow = Math.ceil(hintStartIndex / columnsNumber);
