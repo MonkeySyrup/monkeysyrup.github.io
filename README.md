@@ -386,7 +386,7 @@
   }, 1000);
 
   $('.wordSearchContainer .hintButton').on('click', function() {
-   if(!usedWords || !usedWords.length) {
+   if(usedWords && usedWords.length) {
     var hintsCounting = 0;
        
     var hintWord = usedWords[Math.floor(Math.random()*usedWords.length)];
