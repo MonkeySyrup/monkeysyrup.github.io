@@ -205,7 +205,6 @@
    while(directions.length) {
     var direction = directions[Math.floor(Math.random() * directions.length)]
     var toReverse = Math.floor(Math.random() * 2)
-    console.log(toReverse);
     if(toReverse) {
      var reversedWord = '';
      for(var i = word.length - 1; i >= 0; i--) {
@@ -308,7 +307,7 @@
     }
     if(wordReady) {
      index++;
-     usedWords.push(word);
+     usedWords.push(originalWord);
      var wordIndex = words.indexOf(originalWord);
      if (wordIndex !== -1) {
       words.splice(wordIndex, 1);
