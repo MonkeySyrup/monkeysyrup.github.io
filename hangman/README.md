@@ -183,6 +183,11 @@
   border-radius: 4px;
   border: 1px solid #000;
  }
+ .wordSearchContainer .keyboard .keyboardItem.used {
+  color: gray;
+  border: 1px solid gray;
+  cursor: default;
+ }
 </style>
 
 <div class="mainbar">
@@ -220,6 +225,11 @@
  for(let i = 0; i < letters.length; ++i) {
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
  }
+ $('.keyboardItem').on('click', function() {
+  if(!$(this).hasClass('used')) {
+   $(this).addClass('used');
+  }
+ });
  
  $(document).ready(function() {
   $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
