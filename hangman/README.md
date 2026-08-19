@@ -198,9 +198,9 @@
  var letters = 'ąčęėįšųūžabcdefghijklmnoprstuvyz';
  var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
  var usedWord = words[Math.floor(Math.random() * words.length)];
- $(letters).each(function() {
-  console.log($(this));
- });
+ for(let i = 0; i < letters.length; ++i) {
+  $('.keyboard').append('<div class="keyboardItem">' + letters[i] + '</div>');
+ }
  
  $(document).ready(function() {
   $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
