@@ -168,13 +168,13 @@
 
 <div class="mainbar">
  <div class="wordSearchContainer">
-  <span class="hintButton">?</span>
   <h2>Kartuvės</h2>
-  <span class="timer">00:00</span>
   <div class="wordSearchGrid">
    <canvas id="canvas"></canvas>
   </div>
   <span class="selectedText"></span>
+  <div class="keyboard">
+  </div>
   <div class="wordsList">
    <!--
    <span>kantrybė</span>
@@ -188,29 +188,19 @@
    <div class="finishGameTable">
     <div class="closeOverlay">X</div>
     <span class="resultsTitle">JŪSŲ REZULTATAS:</span>
-    <span class="resultText">0/0</span>
-    <span class="timeSpentText">00:00</span>
+    <span class="resultText">100</span>
    </div>
   </div>
  </div>
 </div>
 
 <script>
- var letters = 'ąčęėįšųūžertyuiopasdfghjklzcvbnm';
+ var letters = 'ąčęėįšųūžabcdefghijklmnoprstuvyz';
  var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
  var usedWord = words[Math.floor(Math.random() * words.length)];
- alert(usedWord);
- 
- var totalWords = usedWords.length;
- var lettersString = 'ąčęėįšųūžabcdefghijklmnoprstuvyz';
- for(let i = 0; i < columnsNumber; ++i) {
-  for(let j = 0; j < columnsNumber; ++j) {
-   if(wordsGrid[i][j] == ':') {
-    wordsGrid[i][j] = lettersString[Math.floor(Math.random()*lettersString.length)];
-   }
-   $('.wordSearchGrid').append('<div class="gridItem" data-index="' + (i * columnsNumber + j + 1) + '">' + wordsGrid[i][j] + '</div>');
-  }
- }
+ $(letters).each(function() {
+  console.log($(this));
+ });
  
  $(document).ready(function() {
   $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
