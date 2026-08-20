@@ -167,6 +167,7 @@
   margin-bottom: 20px;
   width: 300px;
   height: 220px;
+  transition: background 1s ease-in-out;
  }
  .wordSearchContainer .keyboard {
   max-width: 400px;
