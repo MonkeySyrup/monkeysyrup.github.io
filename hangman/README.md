@@ -193,7 +193,7 @@
 <div class="mainbar">
  <div class="wordSearchContainer">
   <h2>Kartuvės</h2>
-  <img class="hangmanPicture">
+  <div class="hangmanPicture"></div>
   <div class="keyboard">
   </div>
   <div class="finishGameOverlay">
@@ -214,7 +214,7 @@
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
  }
  var mistakesCount = 0;
- $('.hangmanPicture').attr('src', 'hangman_' + mistakesCount + '.png');
+ $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
