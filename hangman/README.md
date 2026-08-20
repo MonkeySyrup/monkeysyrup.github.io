@@ -167,7 +167,7 @@
   margin-bottom: 20px;
   width: 300px;
   height: 220px;
-  transition: background 2s ease-in-out;
+  transition: background 1s ease-in-out;
  }
  .wordSearchContainer .keyboard {
   max-width: 400px;
@@ -231,16 +231,13 @@
  });
 
  function checkForEndGame() {
+   $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
    if(mistakesCount >= maxMistakes) {
-    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
     gameCompleted = true;
     $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     $('.wordSearchContainer .finishGameOverlay').animate({
      top: 0,
     }, 300, 'swing');
-   }
-   else {
-    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
    }
   }
  
