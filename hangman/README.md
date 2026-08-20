@@ -198,11 +198,12 @@
   cursor: default;
  }
  .wordSearchContainer .answer {
+  display: flex;
+  gap: 5px;
   margin-bottom: 20px;
  }
  .wordSearchContainer .answer .answerItem {
-  display: flex;
-  gap: 5px;
+  text-align: center;
   border-bottom: 2px solid #000;
   padding-bottom: 5px;
   color: #000;
