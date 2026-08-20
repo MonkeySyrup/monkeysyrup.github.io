@@ -219,237 +219,33 @@
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
  }
  var mistakesCount = 0;
+ var maxMistakes = 7;
  $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
    mistakesCount += 1;
-   $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
+   checkForEndGame();
   }
  });
- 
- $(document).ready(function() {
-  $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
-  var selectedTextContainer = $('.selectedText');
-  var canvasWidth = $('.wordSearchContainer .wordSearchGrid')[0].clientWidth;
-  var canvasHeight = $('.wordSearchContainer .wordSearchGrid')[0].clientHeight;
-  var gridItemWidth = $('.wordSearchContainer .wordSearchGrid .gridItem').outerWidth();
-  $('#canvas').prop({ width: canvasWidth, height: canvasHeight });
-  var c = document.getElementById("canvas");
-  var ctx = c.getContext("2d");
-  ctx.lineWidth = gridItemWidth;
-  ctx.strokeStyle = 'rgba(0, 255, 0, 0.5)';
-  ctx.lineCap = 'round';
 
-  var startRow = 0;
-  var startColumn = 0;
-  var endRow = 0;
-  var endColumn = 0;
-  var selectedText = '';
-  var startLetter = '';
-  var startItemIndex = 0;
-
-  var startDrawing = false;
-  var gameCompleted = false;
-  $('.wordSearchGrid .gridItem').on('mousedown touchstart', function() {
-   if(!gameCompleted) {
-    if($(window).innerWidth() <= 1024) {
-     $('html').css('overflow', 'hidden');
-    }
-    startDrawing = true
-    startItemIndex = $(this).attr('data-index');
-    startRow = Math.ceil(startItemIndex / columnsNumber);
-    startColumn = startItemIndex % columnsNumber;
-    if(startColumn == 0) {
-     startColumn = columnsNumber;
-    }
-    startLetter = $(this)[0].innerHTML;
-    selectedText = startLetter;
-    selectedTextContainer[0].innerHTML = selectedText;
-    ctx.beginPath();
-    ctx.moveTo(startColumn * gridItemWidth - (gridItemWidth / 2), startRow * gridItemWidth - (gridItemWidth / 2));
-    ctx.lineTo(startColumn * gridItemWidth - (gridItemWidth / 2), startRow * gridItemWidth - (gridItemWidth / 2));
-    ctx.stroke();
-   }
-  });
-
-  $('.wordSearchGrid').on('mouseover touchmove', function(e) {
-   if(startDrawing) {
-    
-    var gridItem = e.target;
-    if(typeof(e.originalEvent.touches) !== 'undefined') {
-     gridItem = document.elementFromPoint(e.originalEvent.touches[0].clientX, e.originalEvent.touches[0].clientY);
-    }
-    if(gridItem !== null) {
-     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-     for(let i = 0; i < correctLines.length; ++i) {
-      ctx.beginPath();
-      ctx.moveTo(correctLines[i][0][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][0][0] * gridItemWidth - (gridItemWidth / 2));
-      ctx.lineTo(correctLines[i][1][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][1][0] * gridItemWidth - (gridItemWidth / 2));
-      ctx.stroke();
-      ctx.closePath();
-     }
-     ctx.beginPath();
-     ctx.moveTo(startColumn * gridItemWidth - (gridItemWidth / 2), startRow * gridItemWidth - (gridItemWidth / 2));
-    
-     var itemIndex = gridItem.getAttribute('data-index') || 0;
-     endRow = Math.ceil(itemIndex / columnsNumber);
-     endColumn = itemIndex % columnsNumber;
-
-     if(endColumn == 0) {
-      endColumn = columnsNumber;
-     }
-
-     if(startColumn != 0 && endColumn != 0 && startRow != 0 && endRow != 0 && (startColumn == endColumn || startRow == endRow || Math.abs(startColumn - endColumn) == Math.abs(startRow - endRow))) {
-      if(startColumn == endColumn && startRow == endRow) {
-       selectedText = startLetter;
-      }
-      else {
-       selectedText = '';
-       if(startColumn == endColumn) {
-        if(startRow > endRow) {
-         for(let i = startRow; i >= endRow; --i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (i - 1) + startColumn) + ']')[0].innerHTML;
-         }
-        }
-        else {
-         for(let i = startRow; i <= endRow; ++i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (i - 1) + startColumn) + ']')[0].innerHTML;
-         }
-        }
-       }
-       else if(startRow == endRow) {
-        if(startColumn > endColumn) {
-         for(let i = startColumn; i >= endColumn; --i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow - 1) + i) + ']')[0].innerHTML;
-         }
-        }
-        else {
-         for(let i = startColumn; i <= endColumn; ++i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow - 1) + i) + ']')[0].innerHTML;
-         }
-        }
-       }
-       else if(startColumn > endColumn){
-        var extraRows = 0;
-        for(let i = startColumn; i >= endColumn; --i) {
-         if(startRow > endRow) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow - extraRows - 1) + i) + ']')[0].innerHTML;
-         }
-         else {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow + extraRows - 1) + i) + ']')[0].innerHTML;
-         }
-         extraRows++;
-        }
-       }
-       else if(startColumn < endColumn){
-        var extraRows = 0;
-        if(startRow > endRow) {
-         for(let i = startColumn; i <= endColumn; ++i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow - extraRows - 1) + i) + ']')[0].innerHTML;
-          extraRows++;
-         }
-        }
-        else {
-         for(let i = startColumn; i <= endColumn; ++i) {
-          selectedText += $('.gridItem[data-index=' + (columnsNumber * (startRow + extraRows - 1) + i) + ']')[0].innerHTML;
-          extraRows++;
-         }
-        }
-       }
-      }
-      selectedTextContainer[0].innerHTML = selectedText;
-      ctx.lineTo(endColumn * gridItemWidth - (gridItemWidth / 2), endRow * gridItemWidth - (gridItemWidth / 2));
-     }
-     else {
-      selectedText = startLetter;
-      selectedTextContainer[0].innerHTML = selectedText;
-      ctx.lineTo(startColumn * gridItemWidth - (gridItemWidth / 2), startRow * gridItemWidth - (gridItemWidth / 2));
-     }
-     ctx.stroke();
-    }
-   }
-  });
-
-  $('.wordSearchGrid .gridItem').on('mouseup touchend', function() {
-   if(startDrawing) {
-    startDrawing = false;
-
-    if(usedWords.includes(selectedText)) {
-     correctLines.push([[startRow, startColumn], [endRow, endColumn]]);
-     var index = usedWords.indexOf(selectedText);
-     if (index !== -1) {
-      usedWords.splice(index, 1);
-     }
-     $('.wordSearchContainer .wordsList span:contains(' + selectedText.toLowerCase() + ')').addClass('found');
-    }
-    else {
-     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-     for(let i = 0; i < correctLines.length; ++i) {
-      ctx.beginPath();
-      ctx.moveTo(correctLines[i][0][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][0][0] * gridItemWidth - (gridItemWidth / 2));
-      ctx.lineTo(correctLines[i][1][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][1][0] * gridItemWidth - (gridItemWidth / 2));
-      ctx.stroke();
-      ctx.closePath();
-     }
-    }
-
-    startRow = 0;
-    startColumn = 0;
-    endRow = 0;
-    endColumn = 0;
-    
-    selectedText = '';
-    selectedTextContainer[0].innerHTML = selectedText;
-
-    checkForEndGame();
-    if($(window).innerWidth() <= 1024) {
-     $('html').css('overflow', 'auto');
-    }
-   }
-  });
-  function checkForEndGame() {
-   if(!usedWords || !usedWords.length) {
-    clearInterval(timerInterval);
+ function checkForEndGame() {
+   if(mistakesCount >= maxMistakes) {
     gameCompleted = true;
     $('.wordSearchContainer .finishGameOverlay .resultText')[0].innerHTML = (totalWords - hintsUsed) + '/' + totalWords;
-    $('.wordSearchContainer .finishGameOverlay .resultText')[0].innerHTML = (totalWords - hintsUsed) + '/' + totalWords;
-    $('.wordSearchContainer .finishGameOverlay .timeSpentText')[0].innerHTML = $('.wordSearchContainer .timer')[0].innerHTML;
     $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     $('.wordSearchContainer .finishGameOverlay').animate({
      top: 0,
     }, 300, 'swing');
    }
-  }
-
-
-  $('html').on('mouseup touchend', function() {
-   if(startDrawing) {
-    startDrawing = false;
-
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    for(let i = 0; i < correctLines.length; ++i) {
-     ctx.beginPath();
-     ctx.moveTo(correctLines[i][0][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][0][0] * gridItemWidth - (gridItemWidth / 2));
-     ctx.lineTo(correctLines[i][1][1] * gridItemWidth - (gridItemWidth / 2), correctLines[i][1][0] * gridItemWidth - (gridItemWidth / 2));
-     ctx.stroke();
-     ctx.closePath();
-    }
-
-    startRow = 0;
-    startColumn = 0;
-    endRow = 0;
-    endColumn = 0;
-    
-    selectedText = '';
-    selectedTextContainer[0].innerHTML = selectedText;
-
-    checkForEndGame();
-    if($(window).innerWidth() <= 1024) {
-     $('html').css('overflow', 'auto');
-    }
+   else {
+    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
    }
-  });
+  }
+ 
+ $(document).ready(function() {
+  $('.wordSearchContainer .finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight);
+  
   $('.finishGameTable .closeOverlay').on('click', function() {
    $(this).closest('.finishGameOverlay').css('top', -$('.wordSearchContainer')[0].clientHeight).hide();
   });
