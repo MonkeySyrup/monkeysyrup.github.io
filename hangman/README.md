@@ -197,6 +197,7 @@
 </style>
 
 <div class="mainbar">
+ <img class="preloadPicture">
  <div class="wordSearchContainer">
   <h2>Kartuvės</h2>
   <div class="hangmanPicture"></div>
@@ -222,6 +223,7 @@
  var mistakesCount = 0;
  var maxMistakes = 7;
  $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
+ $('.preloadPicture').css('background', 'url("hangman_' + (mistakesCount + 1) + '.png") no-repeat');
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
@@ -238,6 +240,9 @@
     $('.wordSearchContainer .finishGameOverlay').animate({
      top: 0,
     }, 300, 'swing');
+   }
+   else {
+    $('.preloadPicture').css('background', 'url("hangman_' + (mistakesCount + 1) + '.png") no-repeat');
    }
   }
  
