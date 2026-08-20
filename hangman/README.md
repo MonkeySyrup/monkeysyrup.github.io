@@ -232,7 +232,6 @@
  function checkForEndGame() {
    if(mistakesCount >= maxMistakes) {
     gameCompleted = true;
-    $('.wordSearchContainer .finishGameOverlay .resultText')[0].innerHTML = (totalWords - hintsUsed) + '/' + totalWords;
     $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     $('.wordSearchContainer .finishGameOverlay').animate({
      top: 0,
