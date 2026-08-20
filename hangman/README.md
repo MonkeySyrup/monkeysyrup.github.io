@@ -193,20 +193,8 @@
 <div class="mainbar">
  <div class="wordSearchContainer">
   <h2>Kartuvės</h2>
-  <div class="wordSearchGrid">
-   <canvas id="canvas"></canvas>
-  </div>
-  <span class="selectedText"></span>
+  <img class="hangmanPicture">
   <div class="keyboard">
-  </div>
-  <div class="wordsList">
-   <!--
-   <span>kantrybė</span>
-   <span>marmeladas</span>
-   <span>rankovė</span>
-   <span>skaičius</span>
-   <span>uodas</span>
-   //-->
   </div>
   <div class="finishGameOverlay">
    <div class="finishGameTable">
@@ -225,6 +213,9 @@
  for(let i = 0; i < letters.length; ++i) {
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
  }
+ var hangmanImages = ['https://i.ibb.co/NgQqNZsJ/hangman-0.png', 'https://i.ibb.co/mCSsZyFD/hangman-1.png', 'https://i.ibb.co/HD4235ND/hangman-2.png', 'https://i.ibb.co/yFspgRG6/hangman-3.png', 'https://i.ibb.co/2wJR8G5/hangman-4.png', 'https://i.ibb.co/4rcFpBd/hangman-5.png', 'https://i.ibb.co/vCgjSQ5B/hangman-6.png', 'https://i.ibb.co/6cgn4HZg/hangman-7.png'];
+ var mistakesCount = 0;
+ $('.hangmanPicture').attr('src', hangmanImages[mistakesCount]);
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
