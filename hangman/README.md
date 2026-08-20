@@ -211,7 +211,7 @@
   padding-bottom: 5px;
   color: #000;
   font-size: 32px;
-  width: 35px;
+  width: 25px;
   height: 35px;
   text-transform: uppercase;
  }
