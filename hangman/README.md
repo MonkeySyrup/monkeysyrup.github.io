@@ -273,7 +273,17 @@
  function checkForEndGame() {
    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
    if(mistakesCount >= maxMistakes || usedWord.length == $('.answer .answerItem.revealed').length) {
-    console.log('Game over');
+    if(mistakesCount >= maxMistakes) {
+     alert('Pralaimėjote!');
+     for(let i = 0; i < usedWord.length; ++i) {
+      if(!$('.answer .answerItem[data-index=' + i + ']').hasClass('revealed')) {
+       $('.answer .answerItem[data-index=' + i + ']')[0].textContent = usedWord[i];
+      }
+     }
+    }
+    else {
+     alert('Sveikiname!');
+    }
     gameCompleted = true;
     // $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     // $('.wordSearchContainer .finishGameOverlay').animate({
