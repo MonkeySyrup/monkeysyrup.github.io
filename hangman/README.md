@@ -223,6 +223,7 @@
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
+   mistakesCount += 1;
   }
  });
  
