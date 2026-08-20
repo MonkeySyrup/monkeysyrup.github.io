@@ -215,7 +215,7 @@
  }
  var hangmanImages = ['https://i.ibb.co/NgQqNZsJ/hangman-0.png', 'https://i.ibb.co/mCSsZyFD/hangman-1.png', 'https://i.ibb.co/HD4235ND/hangman-2.png', 'https://i.ibb.co/yFspgRG6/hangman-3.png', 'https://i.ibb.co/2wJR8G5/hangman-4.png', 'https://i.ibb.co/4rcFpBd/hangman-5.png', 'https://i.ibb.co/vCgjSQ5B/hangman-6.png', 'https://i.ibb.co/6cgn4HZg/hangman-7.png'];
  var mistakesCount = 0;
- $('.hangmanPicture').attr('src', '/hangman-7.png');
+ $('.hangmanPicture').attr('src', '/hangman_7.png');
  $('.keyboardItem').on('click', function() {
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
