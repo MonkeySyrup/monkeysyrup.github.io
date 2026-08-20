@@ -239,7 +239,7 @@
  var letters = 'aąbcčdeęėfghiįyjklmnoprsštuųūvzž';
  var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
  var usedWord = words[Math.floor(Math.random() * words.length)];
- console.log(usedWord);
+ var gameCompleted = false;
  for(let i = 0; i < usedWord.length; ++i) {
   $('.answer').append('<span class="answerItem" data-index="' + i + '"></span>');
  }
@@ -251,7 +251,7 @@
  $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
  $('.preloadPicture').css('background', 'url("hangman_' + (mistakesCount + 1) + '.png") no-repeat');
  $('.keyboardItem').on('click', function() {
-  if(mistakesCount < maxMistakes) {
+  if(!gameCompleted) {
    if(!$(this).hasClass('used')) {
     $(this).addClass('used');
     var letterFound = false;
