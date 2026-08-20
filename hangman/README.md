@@ -197,6 +197,9 @@
   border: 1px solid gray;
   cursor: default;
  }
+ .wordSearchContainer .answerContainer {
+  margin-bottom: 20px;
+ }
  .wordSearchContainer .answerContainer .answerItem {
   display: flex;
   gap: 5px;
