@@ -228,10 +228,12 @@
  $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
  $('.preloadPicture').css('background', 'url("hangman_' + (mistakesCount + 1) + '.png") no-repeat');
  $('.keyboardItem').on('click', function() {
-  if(!$(this).hasClass('used')) {
-   $(this).addClass('used');
-   mistakesCount += 1;
-   checkForEndGame();
+  if(mistakesCount < maxMistakes) {
+   if(!$(this).hasClass('used')) {
+    $(this).addClass('used');
+    mistakesCount += 1;
+    checkForEndGame();
+   }
   }
  });
 
@@ -239,10 +241,10 @@
    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
    if(mistakesCount >= maxMistakes) {
     gameCompleted = true;
-    $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
-    $('.wordSearchContainer .finishGameOverlay').animate({
-     top: 0,
-    }, 300, 'swing');
+    // $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
+    // $('.wordSearchContainer .finishGameOverlay').animate({
+    //  top: 0,
+    // }, 300, 'swing');
    }
    else {
     $('.preloadPicture').css('background', 'url("hangman_' + (mistakesCount + 1) + '.png") no-repeat');
