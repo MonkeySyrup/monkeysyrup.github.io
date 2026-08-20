@@ -213,6 +213,7 @@
   font-size: 32px;
   width: 35px;
   height: 35px;
+  text-transform: uppercase;
  }
 </style>
 
@@ -239,7 +240,7 @@
  var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
  var usedWord = words[Math.floor(Math.random() * words.length)];
  for(let i = 0; i < usedWord.length; ++i) {
-  $('.answer').append('<span class="answerItem"></span>');
+  $('.answer').append('<span class="answerItem" data-index="' + i + '"></span>');
  }
  for(let i = 0; i < letters.length; ++i) {
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
@@ -252,7 +253,17 @@
   if(mistakesCount < maxMistakes) {
    if(!$(this).hasClass('used')) {
     $(this).addClass('used');
-    mistakesCount += 1;
+    var letterFound = false;
+    for(let i = 0; i < usedWord.length; ++i) {
+     if(usedWord[i].toUpperCase() == $(this)[0].textContent.toUpperCase()) {
+      $('.answer .answerItem[data-index=' + i + ]').addClass('revealed');
+      $('.answer .answerItem[data-index=' + i + ]').textContent = usedWord[i];
+      letterFound = true;
+     }
+    }
+    if(!letterFound) {
+     mistakesCount += 1;
+    }
     checkForEndGame();
    }
   }
@@ -260,7 +271,8 @@
 
  function checkForEndGame() {
    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
-   if(mistakesCount >= maxMistakes) {
+   if(mistakesCount >= maxMistakes || usedWord.length == $('.answer .answerItem.revealed').length) {
+    console.log('Game over');
     gameCompleted = true;
     // $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     // $('.wordSearchContainer .finishGameOverlay').animate({
