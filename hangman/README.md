@@ -163,6 +163,9 @@
   font-weight: 700;
   cursor: pointer;
  }
+ .wordSearchContainer .preloadPicture {
+  display: none;
+ }
  .wordSearchContainer .hangmanPicture {
   margin-bottom: 20px;
   width: 300px;
@@ -197,7 +200,7 @@
 </style>
 
 <div class="mainbar">
- <img class="preloadPicture">
+ <div class="preloadPicture"></div>
  <div class="wordSearchContainer">
   <h2>Kartuvės</h2>
   <div class="hangmanPicture"></div>
