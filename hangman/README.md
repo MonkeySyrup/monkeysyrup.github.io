@@ -224,6 +224,7 @@
   if(!$(this).hasClass('used')) {
    $(this).addClass('used');
    mistakesCount += 1;
+   $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
   }
  });
  
