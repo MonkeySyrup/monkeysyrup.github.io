@@ -258,7 +258,7 @@
     for(let i = 0; i < usedWord.length; ++i) {
      if(usedWord[i].toUpperCase() == $(this)[0].textContent.toUpperCase()) {
       $('.answer .answerItem[data-index=' + i + ']').addClass('revealed');
-      $('.answer .answerItem[data-index=' + i + ']').textContent = usedWord[i];
+      $('.answer .answerItem[data-index=' + i + ']')[0].textContent = usedWord[i];
       letterFound = true;
      }
     }
