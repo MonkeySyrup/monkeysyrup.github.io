@@ -166,6 +166,8 @@
  }
  .wordSearchContainer .hangmanPicture {
   margin-bottom: 20px;
+  width: 300px;
+  height: 220px;
  }
  .wordSearchContainer .keyboard {
   max-width: 400px;
