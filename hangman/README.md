@@ -203,6 +203,9 @@
   margin-bottom: 20px;
  }
  .wordSearchContainer .answer .answerItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   border-bottom: 2px solid #000;
   padding-bottom: 5px;
