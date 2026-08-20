@@ -167,7 +167,7 @@
   margin-bottom: 20px;
   width: 300px;
   height: 220px;
-  transition: background 1s ease-in-out;
+  transition: background 2s ease-in-out;
  }
  .wordSearchContainer .keyboard {
   max-width: 400px;
@@ -232,6 +232,7 @@
 
  function checkForEndGame() {
    if(mistakesCount >= maxMistakes) {
+    $('.hangmanPicture').css('background', 'url("hangman_' + mistakesCount + '.png") no-repeat');
     gameCompleted = true;
     $('.wordSearchContainer .finishGameOverlay').css('display', 'flex');
     $('.wordSearchContainer .finishGameOverlay').animate({
