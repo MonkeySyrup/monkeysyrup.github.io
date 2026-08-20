@@ -197,6 +197,15 @@
   border: 1px solid gray;
   cursor: default;
  }
+ .wordSearchContainer .answerContainer .answerItem {
+  display: flex;
+  gap: 5px;
+  border-bottom: 2px solid #000;
+  color: #000;
+  font-size: 32px;
+  width: 35px;
+  height: 35px;
+ }
 </style>
 
 <div class="mainbar">
@@ -204,6 +213,7 @@
  <div class="wordSearchContainer">
   <h2>Kartuvės</h2>
   <div class="hangmanPicture"></div>
+  <div class="answerContainer"></div>
   <div class="keyboard">
   </div>
   <div class="finishGameOverlay">
@@ -220,6 +230,9 @@
  var letters = 'aąbcčdeęėfghiįyjklmnoprsštuųūvzž';
  var words = ['abėcėlė', 'acetonas', 'badas', 'bajoras', 'cechas', 'citrina', 'deficitas', 'diagnozė', 'epizodas', 'estetika', 'fantomas', 'fauna', 'gegutė', 'gluosnis', 'ikona', 'ikras', 'jaunimas', 'jautis', 'kablys', 'kantrybė', 'lankas', 'ledai', 'mazgas', 'marmeladas', 'nešikas', 'notaras', 'optika', 'orbita', 'pamaiva', 'paprika', 'rankovė', 'rutulys', 'skaičius', 'sapnas', 'tenoras', 'titnagas', 'uodas', 'užsienis', 'verpetas', 'verslas', 'ypatybė', 'yzopas', 'zebras', 'zenitas', 'ąsotis', 'ąžuolas', 'čiobrelis', 'česnakas', 'ėjikas', 'ėriukas', 'įbrolis', 'įdomybė', 'šachta', 'šaknis', 'ūkana', 'ūkininkas', 'žagsulys', 'žaibas'];
  var usedWord = words[Math.floor(Math.random() * words.length)];
+ for(let i = 0; i < usedWord.length; ++i) {
+  $('.answerContainer').append('<span class="answerItem"></span>');
+ }
  for(let i = 0; i < letters.length; ++i) {
   $('.keyboard').append('<div class="keyboardItem">' + letters[i].toUpperCase() + '</div>');
  }
