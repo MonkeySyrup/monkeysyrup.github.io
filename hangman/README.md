@@ -164,6 +164,9 @@
   font-weight: 700;
   cursor: pointer;
  }
+ .wordSearchContainer .hangmanPicture {
+  margin-bottom: 20px;
+ }
  .wordSearchContainer .keyboard {
   max-width: 400px;
   display: flex;
