@@ -82,7 +82,6 @@
 
  .wordSearchContainer .wordSearchGrid canvas {
   position: absolute;
-
   pointer-events: none;
  }
  .wordSearchContainer .selectedText {
@@ -175,6 +174,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
+  margin-bottom: 24px;
  }
  .wordSearchContainer .keyboard .keyboardItem {
   display: flex;
